@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div class="jumbo">
+    <h2>Welcome to Action Time<h2>
+  </div>
+  <br/>
+  <div class="grid-container">
+  {% for obj in dt %}
+      <div class="grid-item">Votes</div>
+
+      <div class="sub-grid-container">
+        <div class="sub-grid-item">Project: <a href={{ obj[3] }}>{{ obj[0] }}</a> </div>
+        <div class="sub-grid-item">Requester: {{ obj[1] }}</div>
+      </div>
+      <div class="grid-item">Data</div>
+  {% endfor %}
+  </div>
+{% endblock %}

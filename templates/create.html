@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+  
+{% block content %}
+  <h2>Create Project</h2>
+  <head>
+        <title>Reusable Form Demo</title>
+  </head>
+  <body>
+      <form action="" method="post">
+          {{ form.csrf }}
+
+          <div class="inputText">
+              {{ form.name.label }} {{ form.name }}
+          </div>
+          <br/>
+          <div class="inputText">
+              {{ form.projectName.label }} {{ form.projectName }}
+          </div>
+          <br/>
+          <div class="inputText">
+              {{ form.comment.label }}  {{ form.comment }}
+          </div>
+          <br/>
+          <div class="inputText">
+              <input type="submit" class="submitBtn" value="" />
+          </div>
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+              <div class={{ category }}>{{ message }}</div>
+            {% endfor %}
+          {% endwith %}
+      </form>
+    </body>
+{% endblock %}
