@@ -11,7 +11,8 @@ app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2b6176a'
 class ReusableForm(Form):
     name = StringField('Name:', validators=[validators.required()])
     projectName = StringField('Project Name:', validators=[validators.required()])
-    comment = StringField('Comment:', validators=[validators.required()])
+    comment = StringField('Summary:', validators=[validators.required()])
+    details = StringField('Details:', validators=[validators.required()])
 
 
 @app.route('/')
@@ -39,7 +40,23 @@ def home():
 
 @app.route('/projects/<project>')
 def showproject(project):
-    return render_template('projectlayout.html', some_project=project)
+    conn = None
+    data = {}
+    try:
+        # read connection parameters
+        conn = dbconn.getconnection()
+        cur = conn.cursor()
+        query = 'SELECT * FROM public.projectdata WHERE project = \'%s\';' % project
+        cur.execute(query)
+        data = cur.fetchall()
+        # close the communication with the PostgreSQL
+        cur.close()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+    return render_template('projectlayout.html', some_project=project, dt=data)
 
 
 @app.route('/about')
@@ -54,6 +71,7 @@ def create():
         name = request.form['name']
         project = request.form['projectName']
         comment = request.form['comment']
+        details = request.form['details']
         result = False
         if form.validate():
             conn = None
@@ -64,8 +82,8 @@ def create():
                 # create a cursor
                 cur = conn.cursor()
 
-                data = ("'%s'" % name, "'%s'" % project, "'%s'" % comment)
-                query = "INSERT INTO public.projectdata (name, project, comment) VALUES (%s, %s, %s);" % data
+                data = ("'%s'" % name, "'%s'" % project, "'%s'" % comment, "'%s'" % details)
+                query = "INSERT INTO public.projectdata (name, project, comment, projectinfo) VALUES (%s, %s, %s, %s);" % data
 
                 cur.execute(query)
                 conn.commit()

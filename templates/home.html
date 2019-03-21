@@ -6,13 +6,13 @@
   <br/>
   <div class="grid-container">
   {% for obj in dt %}
-      <div class="grid-item">Votes</div>
+      <div class="grid-item-votes">Votes <br> {{ obj[3][0] - obj[3][1] }}</div>
 
       <div class="sub-grid-container">
-        <div class="sub-grid-item">Project: <a href={{ obj[3] }}>{{ obj[0] }}</a> </div>
+        <div class="sub-grid-item">Project: <a href={{ obj[5] }}>{{ obj[0] }}</a> </div>
         <div class="sub-grid-item">Requester: {{ obj[1] }}</div>
       </div>
-      <div class="grid-item">Data</div>
+      <div class="grid-item">{{ obj[2] }}</div>
   {% endfor %}
   </div>
-{% endblock %}
+{% endblock %}grid-item

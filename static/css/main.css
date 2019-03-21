@@ -114,6 +114,7 @@ h3 {
  * Display navigation links inline
  */
 .grid-container {
+  border-top: 1px solid black;
   display: grid;
   grid-template-columns: auto auto auto;
   padding: 10px;
@@ -124,16 +125,25 @@ h3 {
   padding: 40px;
   font-size: 20px;
   text-align: center;
+  border-bottom: 1px solid black;
 }
 
 .sub-grid-container {
   display: grid;
   grid-template-rows: auto auto;
   background-color: #EEFFFF;
+  border-bottom: 1px solid black;
 }
 
 .sub-grid-item {
   padding: 20px;
   font-size: 15px;
   text-align: left;
+}
+.grid-item-votes {
+  padding: 40px;
+  grid-template-rows: auto auto;
+  font-size: 20px;
+  text-align: center;
+  border-bottom: 1px solid black;
 }

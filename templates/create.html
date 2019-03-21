@@ -3,7 +3,7 @@
 {% block content %}
   <h2>Create Project</h2>
   <head>
-        <title>Reusable Form Demo</title>
+        <title>Reusable Form</title>
   </head>
   <body>
       <form action="" method="post">
@@ -19,6 +19,9 @@
           <br/>
           <div class="inputText">
               {{ form.comment.label }}  {{ form.comment }}
+          </div>
+          <div class="inputText">
+              {{ form.details.label }}  {{ form.details }}
           </div>
           <br/>
           <div class="inputText">
