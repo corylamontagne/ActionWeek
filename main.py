@@ -29,6 +29,8 @@ def home():
             data[x] = data[x] + (str("./projects/"+data[x][0].replace(" ", '')), 0)
         # close the communication with the PostgreSQL
         cur.close()
+        # Sort by votes
+        data.sort(key=lambda v: (v[3][0]-v[3][1]), reverse=True)
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
     finally:
